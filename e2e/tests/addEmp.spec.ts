@@ -1,12 +1,16 @@
 import { test } from "@playwright/test";
 import { LoginPage } from "./pages/loginPage";
-import { EmpPage } from "./pages/EmpPage";
+import { HomePage } from "./pages/homePage";
+import { AddEmp } from "./pages/addEmpPage";
 
-test("test", async ({ page }) => {
+test.only("test", async ({ page }) => {
   const loginPage = new LoginPage(page);
-  const empPage = new EmpPage(page);
+  const homePage = new HomePage(page);
+  const addEmp = new AddEmp(page);
   await loginPage.visit();
   await loginPage.loginUser();
-  await empPage.addEmpDetails();
+  await homePage.getLeftMenuComponent.selectLeftMenuItem("PIM");
+  await homePage.getTopMenuComponent.selectTopMenuItem("Add Employee");
+  await addEmp.addEmp();
   await loginPage.logout();
 });
