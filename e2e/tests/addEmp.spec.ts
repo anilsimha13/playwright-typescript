@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 import { LoginPage } from "./pages/loginPage";
 import { HomePage } from "./pages/homePage";
 import { AddEmp } from "./pages/addEmpPage";
+import { getRandomEmpDetails } from "../testData/randomData";
 
 test("test", async ({ page }) => {
   const loginPage = new LoginPage(page);
@@ -11,6 +12,6 @@ test("test", async ({ page }) => {
   await loginPage.loginUser();
   await homePage.getLeftMenuComponent.selectLeftMenuItem("PIM");
   await homePage.getTopMenuComponent.selectTopMenuItem("Add Employee");
-  await addEmp.addEmp();
+  await addEmp.addEmp(getRandomEmpDetails());
   await loginPage.logout();
 });
